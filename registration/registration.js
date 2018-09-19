@@ -1,6 +1,3 @@
-
-
-import { Selector, ClientFunction } from 'testcafe';
 import { registrationPage, randomEmail, password, getCurrentUrl } from "./registration-page";
 
 fixture `Getting Started`
@@ -32,12 +29,12 @@ test('Registration', async t => {
     .click( registrationPage.countryDropdown )
     .click( registrationPage.countryDropdown.child( "option").nth( 1) )
     .typeText( registrationPage.phoneInput, "0742374245" )
-    .typeText( registrationPage.alisInput, "what eva' man!")
+    .typeText( registrationPage.aliasInput, "what eva' man!")
     .click( registrationPage.submit )
     .wait( 2000 )
 
   const successMessage = "Welcome to your account. Here you can manage all of your personal information and orders.";
-  const currentURL = await getCurrentUrl( t )
+  const currentURL = await getCurrentUrl(  )
   await t
     .expect( currentURL ).eql( "this is where I am" )
     .expect( registrationPage.successMessage.innerText).eql( successMessage )
@@ -45,7 +42,7 @@ test('Registration', async t => {
 
 });
 
-test.only( "Login", async t => {
+test( "Login", async t => {
   await t
     .click('.login')
     .typeText( '#email', "cipri@mailinator.com" )
