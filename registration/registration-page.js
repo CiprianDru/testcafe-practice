@@ -5,6 +5,7 @@ export const registrationPage = new Page( );
 
 registrationPage.loginButton = Selector( ".login" );
 registrationPage.emailInput = Selector( "#email_create" );
+registrationPage.submit = Selector( "")
 registrationPage.radioGenderMale = Selector( "#id_gender1" );
 registrationPage.radioGenderFemale = Selector( "#id_gender2" );
 registrationPage.firstNameInputPI = Selector( "#customer_firstname" );
@@ -23,7 +24,7 @@ registrationPage.ZipInput = Selector( "#postcode" );
 registrationPage.countryDropdown = Selector( '#id_country');
 registrationPage.phoneInput = Selector( "#phone_mobile");
 registrationPage.aliasInput = Selector( "#alias");
-registrationPage.submit =  Selector( "#submitAccount");
+registrationPage.submitAccount =  Selector( "#submitAccount");
 registrationPage.header = Selector( "h1");
 registrationPage.successMessage = Selector( ".info-account");
 registrationPage.registeredEmail = Selector( "#email" );
@@ -42,3 +43,14 @@ export const getCurrentUrl = async function( ) {
 
 export const randomEmail = "ciprian" + Math.round( Math.random( ) * 148234257 ) + "@mailinator.com"
 export const password = "adminadmin";
+
+export const selectDateOfBirth = async function (t, day, month, year ) {
+  await t
+  .click( registrationPage.daysDropdownPI )
+  .click( registrationPage.daysDropdownPI.child("option[value='" + day + "']" ) )
+  .click( registrationPage.monthsDropdownPI )
+  .click( registrationPage.monthsDropdownPI.child("option[value='" + month + "']" ) )
+  .click( registrationPage.yearDropdownPI )
+  .click( registrationPage.yearDropdownPI.child("option[value='" + year + "']" ) )
+
+};

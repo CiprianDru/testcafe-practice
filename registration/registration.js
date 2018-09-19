@@ -1,36 +1,41 @@
-import { registrationPage, randomEmail, password, getCurrentUrl } from "./registration-page";
+import { registrationPage, randomEmail, password, getCurrentUrl, selectDateOfBirth } from "./registration-page";
 
 fixture `Getting Started`
     .page `http://automationpractice.com/index.php`;
 
-test('Registration', async t => {
+test.only('Registration', async t => {
   await t
-    .click('.login')
-    .typeText(' #email_create', randomEmail )
+    .click(registrationPage.loginButton)
+    .typeText(registrationPage.emailInput, randomEmail )
     .click( "#SubmitCreate" )
     .click( registrationPage.radioGenderMale )
     .typeText( registrationPage.firstNameInputPI, "Ciprian")
     .typeText( registrationPage.lastNameInputPI, "Druhora")
     .typeText( registrationPage.passwordInputPI, "adminadmin")
-    .click( registrationPage.daysDropdownPI )
-    .click( registrationPage.daysDropdownPI.child( "option").nth( 24 ) )
-    .click( registrationPage.monthsDropdownPI )
-    .click( registrationPage.monthsDropdownPI.child("option").nth(11) )
-    .click( registrationPage.yearDropdownPI )
-    .click( registrationPage.yearDropdownPI.child("option").nth( 16 ) )
-    .typeText( registrationPage.firstNameInAddress, "Ciprian" )
-    .typeText( registrationPage.lastNameInAddress, "Druhora" )
+
+  await selectDateOfBirth( t, "25", "12", "1988" )
+
+  await t
+    .typeText( registrationPage.firstNameInAddress, "Ciprian", { replace: true } )
+    .typeText( registrationPage.lastNameInAddress, "Druhora", { replace: true } )
     .typeText( registrationPage.companyInput , "tuttiFrutti" )
     .typeText( registrationPage.addressInput, "Calea Turzii, nr.122" )
     .typeText( registrationPage.cityInput, "Kolosjvar" )
+
+
     .click( registrationPage.stateInput )
-    .click( registrationPage.stateInput.child( "option").nth( 4 ))
+    .click( registrationPage.stateInput.child("option[value='" + "Arkansas" + "']" ) )
+
     .typeText( registrationPage.ZipInput, "47000" )
+
     .click( registrationPage.countryDropdown )
-    .click( registrationPage.countryDropdown.child( "option").nth( 1) )
+    .click( registrationPage.countryDropdown.child("option[selected='" + "United States" + "']" ) )
+
     .typeText( registrationPage.phoneInput, "0742374245" )
     .typeText( registrationPage.aliasInput, "what eva' man!")
-    .click( registrationPage.submit )
+
+    .click( registrationPage.submitAccount )
+
     .wait( 2000 )
 
   const successMessage = "Welcome to your account. Here you can manage all of your personal information and orders.";
