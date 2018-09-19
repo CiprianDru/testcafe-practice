@@ -1,0 +1,15 @@
+{
+  "name": "automationweb",
+  "version": "1.0.0",
+  "description": "Automated web tests using testcafe",
+  "main": "registration.js",
+  "scripts": {
+    "chrome": "testcafe chrome",
+    "safari": "testcafe safari"
+  },
+  "author": "cipri",
+  "license": "ISC",
+  "devDependencies": {
+    "testcafe": "^0.22.0"
+  }
+}
