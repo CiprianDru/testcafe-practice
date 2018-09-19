@@ -1,2 +1,2 @@
 # testcafe-practice
-registration
+registration form
