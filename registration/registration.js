@@ -3,7 +3,7 @@ import { registrationPage, randomEmail, password, getCurrentUrl, selectDateOfBir
 fixture `Getting Started`
     .page `http://automationpractice.com/index.php`;
 
-test.only('Registration', async t => {
+test('Registration', async t => {
   await t
     .click(registrationPage.loginButton)
     .typeText(registrationPage.emailInput, randomEmail )
@@ -11,7 +11,7 @@ test.only('Registration', async t => {
     .click( registrationPage.radioGenderMale )
     .typeText( registrationPage.firstNameInputPI, "Ciprian")
     .typeText( registrationPage.lastNameInputPI, "Druhora")
-    .typeText( registrationPage.passwordInputPI, "adminadmin")
+    .typeText( registrationPage.passwordInputPI, "Asdf1234!")
 
   await selectDateOfBirth( t, "25", "12", "1988" )
 
@@ -19,20 +19,20 @@ test.only('Registration', async t => {
     .typeText( registrationPage.firstNameInAddress, "Ciprian", { replace: true } )
     .typeText( registrationPage.lastNameInAddress, "Druhora", { replace: true } )
     .typeText( registrationPage.companyInput , "tuttiFrutti" )
-    .typeText( registrationPage.addressInput, "Calea Turzii, nr.122" )
+    .typeText( registrationPage.addressInput, "Calea Turzii, nr.1222" )
     .typeText( registrationPage.cityInput, "Kolosjvar" )
 
 
     .click( registrationPage.stateInput )
-    .click( registrationPage.stateInput.child("option[value='" + "Arkansas" + "']" ) )
+    .click( registrationPage.stateInput.child( "option" ).withText( "Arkansas" ) )
 
     .typeText( registrationPage.ZipInput, "47000" )
 
     .click( registrationPage.countryDropdown )
-    .click( registrationPage.countryDropdown.child("option[selected='" + "United States" + "']" ) )
+    .click( registrationPage.countryDropdown.child("option" ).withText( "United States" ) )
 
-    .typeText( registrationPage.phoneInput, "0742374245" )
-    .typeText( registrationPage.aliasInput, "what eva' man!")
+    .typeText( registrationPage.phoneInput, "07453474245" )
+    .typeText( registrationPage.aliasInput, "Alias")
 
     .click( registrationPage.submitAccount )
 
@@ -41,7 +41,7 @@ test.only('Registration', async t => {
   const successMessage = "Welcome to your account. Here you can manage all of your personal information and orders.";
   const currentURL = await getCurrentUrl(  )
   await t
-    .expect( currentURL ).eql( "this is where I am" )
+    .expect( currentURL ).eql( "http://automationpractice.com/index.php?controller=my-account" )
     .expect( registrationPage.successMessage.innerText).eql( successMessage )
     .expect( registrationPage.header.innerText).eql( "MY ACCOUNT")
 
@@ -57,7 +57,7 @@ test( "Login", async t => {
   const successMessage = "Welcome to your account. Here you can manage all of your personal information and orders.";
   const currentURL = await getCurrentUrl( t )
   await t
-    .expect( currentURL ).eql( "this is where I am" )
+    .expect( currentURL ).eql( "http://automationpractice.com/index.php?controller=my-account" )
     .expect( registrationPage.successMessage.innerText).eql( successMessage )
     .expect( registrationPage.header.innerText).eql( "MY ACCOUNT")
 

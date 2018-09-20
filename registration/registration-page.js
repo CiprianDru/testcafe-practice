@@ -42,7 +42,7 @@ export const getCurrentUrl = async function( ) {
 
 
 export const randomEmail = "ciprian" + Math.round( Math.random( ) * 148234257 ) + "@mailinator.com"
-export const password = "adminadmin";
+export const password = "Asdf1234!";
 
 export const selectDateOfBirth = async function (t, day, month, year ) {
   await t
